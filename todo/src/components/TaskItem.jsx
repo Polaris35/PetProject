@@ -1,26 +1,21 @@
 import { useState } from "react";
 
-export const TaskItem = ({ onChangedMark, elem, onDelete }) => {
-    const [checkState, setCheckState] = useState(() => {
-        return elem.checkState;
-    });
-
+export const TaskItem = ({ label, checked, onChange, onDelete }) => {
     return (
         <div className="TaskItem">
             <input
                 type="checkbox"
-                checked={checkState}
+                checked={checked}
                 onChange={(e) => {
-                    setCheckState(e.target.checked);
-                    onChangedMark(checkState);
+                    onChange(e.target.checked);
                 }}
             />
             <label
                 style={{
-                    textDecoration: checkState ? "line-through" : "none",
+                    textDecoration: checked ? "line-through" : "none",
                 }}
             >
-                {elem.name}
+                {label}
             </label>
             <button onClick={onDelete}>X</button>
         </div>

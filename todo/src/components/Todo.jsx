@@ -34,10 +34,10 @@ export const Todo = () => {
         );
     };
 
-    const changeMark = (ind) => {
+    const changeMark = (idx, value) => {
         setTaskList((e) => {
             const copy = JSON.parse(JSON.stringify(e));
-            copy[ind].checked = !copy[ind].checked;
+            copy[idx].checked = value;
             return copy;
         });
     };
@@ -63,10 +63,11 @@ export const Todo = () => {
                 {taskList.map((item, index) => {
                     return (
                         <TaskItem
-                            onChangedMark={() => changeMark(index)}
+                            label={item.name}
+                            checked={item.checked}
+                            onChange={(v) => changeMark(index, v)}
                             key={item.name + index}
                             onDelete={() => deleteItem(index)}
-                            elem={item}
                         />
                     );
                 })}
